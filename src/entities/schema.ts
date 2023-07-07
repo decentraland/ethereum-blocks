@@ -6,7 +6,6 @@ import {
   Value,
   ValueKind,
   store,
-  Address,
   Bytes,
   BigInt,
   BigDecimal
@@ -20,22 +19,31 @@ export class Block extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Block entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Block entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Block", id.toString(), this);
+    assert(id != null, "Cannot save Block entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Block must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Block", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): Block | null {
+    return changetype<Block | null>(store.get_in_block("Block", id));
   }
 
   static load(id: string): Block | null {
-    return store.get("Block", id) as Block | null;
+    return changetype<Block | null>(store.get("Block", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
   }
 
   set id(value: string) {
@@ -44,7 +52,11 @@ export class Block extends Entity {
 
   get number(): BigInt {
     let value = this.get("number");
-    return value.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set number(value: BigInt) {
@@ -53,7 +65,11 @@ export class Block extends Entity {
 
   get timestamp(): BigInt {
     let value = this.get("timestamp");
-    return value.toBigInt();
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
   }
 
   set timestamp(value: BigInt) {
@@ -62,7 +78,7 @@ export class Block extends Entity {
 
   get parentHash(): string | null {
     let value = this.get("parentHash");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -70,16 +86,16 @@ export class Block extends Entity {
   }
 
   set parentHash(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("parentHash");
     } else {
-      this.set("parentHash", Value.fromString(value as string));
+      this.set("parentHash", Value.fromString(<string>value));
     }
   }
 
   get author(): string | null {
     let value = this.get("author");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -87,16 +103,16 @@ export class Block extends Entity {
   }
 
   set author(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("author");
     } else {
-      this.set("author", Value.fromString(value as string));
+      this.set("author", Value.fromString(<string>value));
     }
   }
 
   get difficulty(): BigInt | null {
     let value = this.get("difficulty");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -104,16 +120,16 @@ export class Block extends Entity {
   }
 
   set difficulty(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("difficulty");
     } else {
-      this.set("difficulty", Value.fromBigInt(value as BigInt));
+      this.set("difficulty", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get totalDifficulty(): BigInt | null {
     let value = this.get("totalDifficulty");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -121,16 +137,16 @@ export class Block extends Entity {
   }
 
   set totalDifficulty(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("totalDifficulty");
     } else {
-      this.set("totalDifficulty", Value.fromBigInt(value as BigInt));
+      this.set("totalDifficulty", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get gasUsed(): BigInt | null {
     let value = this.get("gasUsed");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -138,16 +154,16 @@ export class Block extends Entity {
   }
 
   set gasUsed(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("gasUsed");
     } else {
-      this.set("gasUsed", Value.fromBigInt(value as BigInt));
+      this.set("gasUsed", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get gasLimit(): BigInt | null {
     let value = this.get("gasLimit");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -155,16 +171,16 @@ export class Block extends Entity {
   }
 
   set gasLimit(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("gasLimit");
     } else {
-      this.set("gasLimit", Value.fromBigInt(value as BigInt));
+      this.set("gasLimit", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get receiptsRoot(): string | null {
     let value = this.get("receiptsRoot");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -172,16 +188,16 @@ export class Block extends Entity {
   }
 
   set receiptsRoot(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("receiptsRoot");
     } else {
-      this.set("receiptsRoot", Value.fromString(value as string));
+      this.set("receiptsRoot", Value.fromString(<string>value));
     }
   }
 
   get transactionsRoot(): string | null {
     let value = this.get("transactionsRoot");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -189,16 +205,16 @@ export class Block extends Entity {
   }
 
   set transactionsRoot(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("transactionsRoot");
     } else {
-      this.set("transactionsRoot", Value.fromString(value as string));
+      this.set("transactionsRoot", Value.fromString(<string>value));
     }
   }
 
   get stateRoot(): string | null {
     let value = this.get("stateRoot");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -206,16 +222,16 @@ export class Block extends Entity {
   }
 
   set stateRoot(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("stateRoot");
     } else {
-      this.set("stateRoot", Value.fromString(value as string));
+      this.set("stateRoot", Value.fromString(<string>value));
     }
   }
 
   get size(): BigInt | null {
     let value = this.get("size");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toBigInt();
@@ -223,16 +239,16 @@ export class Block extends Entity {
   }
 
   set size(value: BigInt | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("size");
     } else {
-      this.set("size", Value.fromBigInt(value as BigInt));
+      this.set("size", Value.fromBigInt(<BigInt>value));
     }
   }
 
   get unclesHash(): string | null {
     let value = this.get("unclesHash");
-    if (value === null) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toString();
@@ -240,10 +256,10 @@ export class Block extends Entity {
   }
 
   set unclesHash(value: string | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("unclesHash");
     } else {
-      this.set("unclesHash", Value.fromString(value as string));
+      this.set("unclesHash", Value.fromString(<string>value));
     }
   }
 }

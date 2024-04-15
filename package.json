@@ -9,15 +9,17 @@
     "prepare:sepolia": "mustache config/ethereum-goerli.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:mumbai": "mustache config/matic-mumbai.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:matic": "mustache config/matic-mainnet.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
+    "prepare:amoy": "mustache config/matic-amoy.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "deploy:mainnet": "npm run prepare:mainnet && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/  decentraland/blocks-ethereum-mainnet",
     "deploy:ropsten": "npm run prepare:ropsten && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/  decentraland/blocks-ethereum-ropsten",
     "deploy:goerli": "npm run prepare:goerli && npx graph deploy  --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/  decentraland/blocks-ethereum-goerli",
     "deploy:sepolia": "npm run prepare:sepolia && npx graph deploy --studio blocks-ethereum-sepolia",
     "deploy:mumbai": "npm run prepare:mumbai && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-mumbai",
-    "deploy:matic": "npm run prepare:matic && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-mainnet"
+    "deploy:matic": "npm run prepare:matic && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-mainnet",
+    "deploy:amoy": "npm run prepare:amoy && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-amoy"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.51.2",
+    "@graphprotocol/graph-cli": "^0.69.2",
     "@graphprotocol/graph-ts": "^0.31.0",
     "mustache": "^4.0.1"
   }

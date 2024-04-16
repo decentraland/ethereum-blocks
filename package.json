@@ -16,7 +16,7 @@
     "deploy:sepolia": "npm run prepare:sepolia && npx graph deploy --studio blocks-ethereum-sepolia",
     "deploy:mumbai": "npm run prepare:mumbai && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-mumbai",
     "deploy:matic": "npm run prepare:matic && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-mainnet",
-    "deploy:amoy": "npm run prepare:amoy && npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ decentraland/blocks-matic-amoy"
+    "deploy:amoy": "npm run prepare:amoy && npx graph deploy --studio decentraland/blocks-matic-amoy"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.69.2",

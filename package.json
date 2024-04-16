@@ -6,7 +6,7 @@
     "prepare:mainnet": "mustache config/ethereum-mainnet.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:ropsten": "mustache config/ethereum-ropsten.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:goerli": "mustache config/ethereum-goerli.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
-    "prepare:sepolia": "mustache config/ethereum-goerli.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
+    "prepare:sepolia": "mustache config/ethereum-sepolia.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:mumbai": "mustache config/matic-mumbai.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:matic": "mustache config/matic-mainnet.json subgraph.template.yaml > subgraph.yaml && npm run codegen",
     "prepare:amoy": "mustache config/matic-amoy.json subgraph.template.yaml > subgraph.yaml && npm run codegen",

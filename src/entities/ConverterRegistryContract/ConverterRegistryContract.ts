@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class TokenAddition extends ethereum.Event {
@@ -146,22 +146,22 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.call(
       "tokenTable",
       "tokenTable(address):(bool,uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
 
     return new ConverterRegistryContract__tokenTableResult(
       result[0].toBoolean(),
-      result[1].toBigInt()
+      result[1].toBigInt(),
     );
   }
 
   try_tokenTable(
-    param0: Address
+    param0: Address,
   ): ethereum.CallResult<ConverterRegistryContract__tokenTableResult> {
     let result = super.tryCall(
       "tokenTable",
       "tokenTable(address):(bool,uint256)",
-      [ethereum.Value.fromAddress(param0)]
+      [ethereum.Value.fromAddress(param0)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -170,8 +170,8 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(
       new ConverterRegistryContract__tokenTableResult(
         value[0].toBoolean(),
-        value[1].toBigInt()
-      )
+        value[1].toBigInt(),
+      ),
     );
   }
 
@@ -179,7 +179,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.call(
       "latestConverterAddress",
       "latestConverterAddress(address):(address)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toAddress();
@@ -189,7 +189,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.tryCall(
       "latestConverterAddress",
       "latestConverterAddress(address):(address)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -200,7 +200,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
 
   tokens(param0: BigInt): Address {
     let result = super.call("tokens", "tokens(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
 
     return result[0].toAddress();
@@ -208,7 +208,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
 
   try_tokens(param0: BigInt): ethereum.CallResult<Address> {
     let result = super.tryCall("tokens", "tokens(uint256):(address)", [
-      ethereum.Value.fromUnsignedBigInt(param0)
+      ethereum.Value.fromUnsignedBigInt(param0),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -238,8 +238,8 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
       "converterAddress(address,uint32):(address)",
       [
         ethereum.Value.fromAddress(_token),
-        ethereum.Value.fromUnsignedBigInt(_index)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_index),
+      ],
     );
 
     return result[0].toAddress();
@@ -247,15 +247,15 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
 
   try_converterAddress(
     _token: Address,
-    _index: BigInt
+    _index: BigInt,
   ): ethereum.CallResult<Address> {
     let result = super.tryCall(
       "converterAddress",
       "converterAddress(address,uint32):(address)",
       [
         ethereum.Value.fromAddress(_token),
-        ethereum.Value.fromUnsignedBigInt(_index)
-      ]
+        ethereum.Value.fromUnsignedBigInt(_index),
+      ],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -266,7 +266,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
 
   tokenAddress(_converter: Address): Address {
     let result = super.call("tokenAddress", "tokenAddress(address):(address)", [
-      ethereum.Value.fromAddress(_converter)
+      ethereum.Value.fromAddress(_converter),
     ]);
 
     return result[0].toAddress();
@@ -276,7 +276,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.tryCall(
       "tokenAddress",
       "tokenAddress(address):(address)",
-      [ethereum.Value.fromAddress(_converter)]
+      [ethereum.Value.fromAddress(_converter)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -304,7 +304,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.call(
       "converterCount",
       "converterCount(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
 
     return result[0].toBigInt();
@@ -314,7 +314,7 @@ export class ConverterRegistryContract extends ethereum.SmartContract {
     let result = super.tryCall(
       "converterCount",
       "converterCount(address):(uint256)",
-      [ethereum.Value.fromAddress(_token)]
+      [ethereum.Value.fromAddress(_token)],
     );
     if (result.reverted) {
       return new ethereum.CallResult();
